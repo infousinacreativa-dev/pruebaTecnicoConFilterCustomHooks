@@ -1,0 +1,27 @@
+.page-item{
+    border: 1px solid #000;
+    padding: 0.7rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+
+}
+
+.page-item:hover {
+    background-color: rgb(66, 39, 39); 
+    color: white !important;
+}
+
+.page-item:hover {
+    color: white !important; 
+}
+
+.page-item.active{
+    background-color: rgb(66, 39, 39); 
+}
+
+.page-item.active {
+
+    color: white !important; 
+}
