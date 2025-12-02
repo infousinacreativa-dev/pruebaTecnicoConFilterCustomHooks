@@ -11,7 +11,7 @@ export function Home() {
 
     const [cards, setCards] = useState([])
     const { filteredData, nameFilter, genderFilter, setNameFilter, setGenderFilter } = useFilters(cards);
-    const { currentItems, currentPage, totalPages, goTo } = usePagination(filteredData, 8);
+    const { currentItems, currentPage, totalPages, goTo, next, prev } = usePagination(filteredData, 8);
 
     useEffect(() => {
         getCards().then(data => setCards(data))
@@ -45,6 +45,8 @@ export function Home() {
                     cardsPerPage={8}
                     setCurrentPage={goTo}
                     totalPages={totalPages}
+                    navPrev={prev}
+                    navNext={next}
                 />
             </div>
 
