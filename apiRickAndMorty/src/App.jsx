@@ -14,7 +14,6 @@ function App() {
         <Router />
       </main>
       <Footer />
-
     </section>
   )
 }
