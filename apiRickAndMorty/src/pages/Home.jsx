@@ -23,7 +23,7 @@ export function Home() {
                 <div className="bloqueFiltros" style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', borderTop: '1px solid #000', borderBottom: '1px solid #000', marginBottom: '1rem', backgroundColor: '#f0f0f0' }}>
                     <label style={{ display: 'flex', gap: '10px' }}>
                         <strong>Filtrar por nombre:</strong>
-                        <input value={nameFilter}  onChange={(e) => { setNameFilter(e.target.value) }}></input>
+                        <input value={nameFilter}  onChange={(e) => { setNameFilter(e.target.value) }} className="bg-amber-800 rounded-2xl px-2"></input>
                     </label>
 
                     <select value={genderFilter} name="gender" onChange={(e) => { setGenderFilter(e.target.value) }} >
