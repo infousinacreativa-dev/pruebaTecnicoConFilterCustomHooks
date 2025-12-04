@@ -2,6 +2,8 @@ import { Menu, X } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
+import { NavigationLinks } from "../navigationLinks/NavigationLinks"
+
 const links = [
     { label: 'Inicio', to: '/' },
     { label: 'Nosotros', to: '/nosotros' },
@@ -31,16 +33,8 @@ export function Header() {
                 </Link>
 
                 <nav aria-label="Navegación principal" className="hidden md:flex  text-white">
-                    <ul className="flex gap-7">
-                        {links.map((link) => {
-                            return (
-                                <li className="hover:scale-110 transition-all duration-500 hover:underline ">
-                                    <Link key={link.to} to={link.to} >
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            )
-                        })}
+                    <ul className="flex gap-7">                       
+                        <NavigationLinks links={links} action={false} />
                     </ul>
                 </nav>
 
@@ -57,14 +51,8 @@ export function Header() {
                 <nav id="menu-mobile"
                     aria-label="Navegación móvil"
                     className="flex flex-col gap-2 text-white text-left px-2 py-2">
-                    <ul>
-                        {links.map(link => (
-                            <li className="hover:scale-110 transition-all duration-500 hover:underline ">
-                                <Link key={link.to} to={link.to} onClick={actionBurger}>
-                                    {link.label}
-                                </Link>
-                            </li>
-                        ))}
+                    <ul>                        
+                        <NavigationLinks links={links} action={true} handleClick={actionBurger}/>
                     </ul>
                 </nav>
             </div>
