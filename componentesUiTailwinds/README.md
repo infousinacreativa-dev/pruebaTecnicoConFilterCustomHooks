@@ -1,0 +1,1 @@
+Este proyecto es para crear componentes reutilizables con React Vite + Tailwindcss
