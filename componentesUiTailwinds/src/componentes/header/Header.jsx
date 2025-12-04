@@ -26,15 +26,16 @@ export function Header() {
         <header className="flex flex-col md:items-center  bg-black py-4 px-2">
             <div className="w-full md:w-7xl flex md:flex-row justify-between items-center">
                 <Link to={'/'} aria-label="Ir a página de inicio">
-                    <img src='/img/logoSenestrariDev.webp' alt="logo de senestrari dev" loading="lazy" className="max-h-10" />
+                    {/* <img src='/img/logoSenestrariDev.webp' alt="logo de senestrari dev" loading="lazy" className="max-h-10" /> */}
+                    <h1 className="text-white font-black text-2xl">LOGO</h1>
                 </Link>
 
                 <nav aria-label="Navegación principal" className="hidden md:flex  text-white">
                     <ul className="flex gap-7">
                         {links.map((link) => {
                             return (
-                                <li>
-                                    <Link key={link.to} to={link.to}>
+                                <li className="hover:scale-110 transition-all duration-500 hover:underline ">
+                                    <Link key={link.to} to={link.to} >
                                         {link.label}
                                     </Link>
                                 </li>
@@ -58,7 +59,7 @@ export function Header() {
                     className="flex flex-col gap-2 text-white text-left px-2 py-2">
                     <ul>
                         {links.map(link => (
-                            <li>
+                            <li className="hover:scale-110 transition-all duration-500 hover:underline ">
                                 <Link key={link.to} to={link.to} onClick={actionBurger}>
                                     {link.label}
                                 </Link>
