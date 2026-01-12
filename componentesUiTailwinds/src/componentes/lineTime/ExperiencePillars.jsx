@@ -99,7 +99,7 @@ export default function ExperiencePillars() {
                 {/* Dot */}
                 <span
                   className={[
-                    "mt-1 h-3 w-3 rounded-full ring-8 transition",
+                    "mt-1 h-3 w-3 rounded-full ring-1 transition",
                     isActive ? `${Red.dot} ${Red.dotRing}` : `${Purple.dot} ${Purple.dotRing}`,
                   ].join(" ")}
                 />
@@ -167,7 +167,7 @@ function ArrowButton({ direction = "left", onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#9284BF]/40 bg-white text-[#9284BF] transition hover:bg-[#9284BF]/10 active:scale-[0.98]"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#9284BF]/0 bg-white text-[#ff1100] transition hover:bg-[#9284BF]/10 active:scale-[0.98]"
       aria-label={isLeft ? "Anterior" : "Siguiente"}
     >
       <svg
