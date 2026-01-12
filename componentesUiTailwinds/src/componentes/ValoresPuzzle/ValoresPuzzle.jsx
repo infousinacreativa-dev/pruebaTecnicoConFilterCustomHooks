@@ -1,7 +1,7 @@
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 
 export default function ValoresPuzzle() {
-  const puzzleBase = "/img/puzle.png"; // ✅ rompecabezas completo (1 sola imagen)
+  const puzzleBase = "/img/puzle.png";
 
   const items = useMemo(
     () => [
@@ -11,8 +11,6 @@ export default function ValoresPuzzle() {
         paragraph:
           "No hacemos nada sin entender primero el para qué. Creamos comunicación que importa. Priorizamos la claridad, la estrategia y el impacto real por sobre el volumen o la urgencia. Elegimos siempre lo que suma.",
         pieceLarge: "/img/img1.png",
-        // posición del hotspot: 2x2 => tl, tr, bl, br
-        cell: "tl",
       },
       {
         key: "coherencia",
@@ -20,7 +18,6 @@ export default function ValoresPuzzle() {
         paragraph:
           "La comunicación externa e interna deben estar alineadas. Trabajamos para que lo que decís sea lo que hacés, actuamos alineados a lo que pensamos, decimos y hacemos...",
         pieceLarge: "/img/img2.png",
-        cell: "tr",
       },
       {
         key: "pasion",
@@ -28,7 +25,6 @@ export default function ValoresPuzzle() {
         paragraph:
           "Nos mueve crear, proponer y empujar ideas con energía. La pasión sostiene el proceso y enciende la acción...",
         pieceLarge: "/img/img3.png",
-        cell: "bl",
       },
       {
         key: "crecimiento",
@@ -36,7 +32,6 @@ export default function ValoresPuzzle() {
         paragraph:
           "La comunicación debe generar resultados. Diseñamos con objetivos claros y medimos el impacto real...",
         pieceLarge: "/img/img4.png",
-        cell: "br",
       },
     ],
     []
@@ -47,6 +42,18 @@ export default function ValoresPuzzle() {
 
   const currentKey = lockedKey ?? activeKey;
   const active = items.find((i) => i.key === currentKey) ?? null;
+
+  // Cerrar con Escape (opcional)
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setLockedKey(null);
+        setActiveKey(null);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const setHover = useCallback(
     (key) => {
@@ -96,22 +103,21 @@ export default function ValoresPuzzle() {
 
           {/* Puzzle derecha */}
           <div className="relative flex justify-center md:justify-end">
-            <div
-              className="relative w-full max-w-[520px] aspect-square"
-              onMouseLeave={clearHover}
-            >
-              {/* Imagen base (encastre perfecto) */}
+            <div className="relative w-full max-w-[520px] aspect-square" onMouseLeave={clearHover}>
+              {/* Base: se oculta cuando hay active */}
               <img
                 src={puzzleBase}
                 alt="Rompecabezas valores"
-                className="
-                  absolute inset-0 h-full w-full object-contain
-                  drop-shadow-[0_30px_70px_rgba(0,0,0,0.18)]
-                "
                 draggable="false"
+                className={[
+                  "absolute inset-0 h-full w-full object-contain",
+                  "drop-shadow-[0_30px_70px_rgba(0,0,0,0.18)]",
+                  "transition-all duration-300 ease-out",
+                  active ? "opacity-0 scale-[0.985]" : "opacity-100 scale-100",
+                ].join(" ")}
               />
 
-              {/* Hotspots invisibles (4 cuadrantes) */}
+              {/* Hotspots invisibles */}
               <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
                 {items.map((it) => (
                   <button
@@ -120,32 +126,40 @@ export default function ValoresPuzzle() {
                     onMouseEnter={() => setHover(it.key)}
                     onFocus={() => setHover(it.key)}
                     onClick={() => setClick(it.key)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") setClick(it.key);
+                    }}
                     className="outline-none"
                     aria-label={it.title.replace("\n", " ")}
                   />
                 ))}
               </div>
 
-              {/* Pieza expandida: protagonista */}
-              {active && (
-                <img
-                  src={active.pieceLarge}
-                  alt={active.title.replace("\n", " ")}
-                  className="
-                    absolute inset-0 h-full w-full object-contain
-                    scale-[1.06]
-                    drop-shadow-[0_60px_90px_rgba(0,0,0,0.28)]
-                    transition-transform duration-300
-                    pointer-events-none
-                  "
-                  draggable="false"
-                />
-              )}
+              {/* Pieza expandida: entrada con animate-pop + salida suave */}
+              <img
+                src={active?.pieceLarge || ""}
+                alt={active?.title?.replace("\n", " ") || ""}
+                draggable="false"
+                className={[
+                  "absolute inset-0 h-full w-full object-contain origin-center",
+                  "drop-shadow-[0_60px_90px_rgba(0,0,0,0.28)]",
+                  "pointer-events-none",
+                  // ✅ entrada: keyframes
+                  active ? "animate-pop" : "",
+                  // ✅ salida: cuando no hay active, dejamos un fade/scale mínimo
+                  !active ? "opacity-0 scale-[0.2] blur-[2px]" : "",
+                  // para que la salida no sea instantánea al quitar animate-pop
+                  "transition-[opacity,transform,filter] duration-200 ease-out",
+                ].join(" ")}
+                style={{
+                  visibility: active ? "visible" : "hidden",
+                }}
+              />
             </div>
           </div>
         </div>
 
-        {/* MOBILE (lo armamos después como tu mock con “detalle”) */}
+        {/* MOBILE: lo hacemos después */}
       </div>
     </section>
   );
