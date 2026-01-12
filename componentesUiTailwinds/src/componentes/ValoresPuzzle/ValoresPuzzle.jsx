@@ -43,7 +43,7 @@ export default function ValoresPuzzle() {
   const currentKey = lockedKey ?? activeKey;
   const active = items.find((i) => i.key === currentKey) ?? null;
 
-  // Cerrar con Escape (opcional)
+  // Esc para cerrar (desktop y mobile)
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") {
@@ -73,6 +73,11 @@ export default function ValoresPuzzle() {
     setActiveKey(null);
   }, [lockedKey]);
 
+  const closeAll = useCallback(() => {
+    setLockedKey(null);
+    setActiveKey(null);
+  }, []);
+
   return (
     <section className="w-full">
       <div className="relative overflow-hidden rounded-2xl bg-[#b9b0ea] px-6 py-10 sm:px-10">
@@ -83,7 +88,7 @@ export default function ValoresPuzzle() {
           </h3>
         </div>
 
-        {/* DESKTOP */}
+        {/* ===================== DESKTOP ===================== */}
         <div className="mt-10 hidden md:grid md:grid-cols-2 md:items-center md:gap-12">
           {/* Texto izquierda */}
           <div className="min-h-[240px]">
@@ -103,8 +108,11 @@ export default function ValoresPuzzle() {
 
           {/* Puzzle derecha */}
           <div className="relative flex justify-center md:justify-end">
-            <div className="relative w-full max-w-[520px] aspect-square" onMouseLeave={clearHover}>
-              {/* Base: se oculta cuando hay active */}
+            <div
+              className="relative w-full max-w-[520px] aspect-square"
+              onMouseLeave={clearHover}
+            >
+              {/* Base */}
               <img
                 src={puzzleBase}
                 alt="Rompecabezas valores"
@@ -117,7 +125,7 @@ export default function ValoresPuzzle() {
                 ].join(" ")}
               />
 
-              {/* Hotspots invisibles */}
+              {/* Hotspots */}
               <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
                 {items.map((it) => (
                   <button
@@ -135,8 +143,9 @@ export default function ValoresPuzzle() {
                 ))}
               </div>
 
-              {/* Pieza expandida: entrada con animate-pop + salida suave */}
+              {/* Expandida (con key para re-disparar la animación) */}
               <img
+                key={active?.key || "none"}
                 src={active?.pieceLarge || ""}
                 alt={active?.title?.replace("\n", " ") || ""}
                 draggable="false"
@@ -144,22 +153,91 @@ export default function ValoresPuzzle() {
                   "absolute inset-0 h-full w-full object-contain origin-center",
                   "drop-shadow-[0_60px_90px_rgba(0,0,0,0.28)]",
                   "pointer-events-none",
-                  // ✅ entrada: keyframes
-                  active ? "animate-pop" : "",
-                  // ✅ salida: cuando no hay active, dejamos un fade/scale mínimo
-                  !active ? "opacity-0 scale-[0.2] blur-[2px]" : "",
-                  // para que la salida no sea instantánea al quitar animate-pop
+                  active ? "animate-pop" : "opacity-0 scale-[0.2] blur-[2px]",
                   "transition-[opacity,transform,filter] duration-200 ease-out",
                 ].join(" ")}
-                style={{
-                  visibility: active ? "visible" : "hidden",
-                }}
+                style={{ visibility: active ? "visible" : "hidden" }}
               />
             </div>
           </div>
         </div>
 
-        {/* MOBILE: lo hacemos después */}
+        {/* ===================== MOBILE ===================== */}
+        <div className="mt-8 md:hidden">
+          {/* Puzzle visible SIEMPRE en mobile */}
+          <div className="mx-auto w-full max-w-[360px]">
+            <div className="relative aspect-square w-full">
+              {/* Base */}
+              <img
+                src={puzzleBase}
+                alt="Rompecabezas valores"
+                draggable="false"
+                className={[
+                  "absolute inset-0 h-full w-full object-contain",
+                  "drop-shadow-[0_18px_40px_rgba(0,0,0,0.18)]",
+                  "transition-all duration-300 ease-out",
+                  active ? "opacity-0 scale-[0.985]" : "opacity-100 scale-100",
+                ].join(" ")}
+              />
+
+              {/* Hotspots */}
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+                {items.map((it) => (
+                  <button
+                    key={`m-${it.key}`}
+                    type="button"
+                    onClick={() => {
+                      // en mobile usamos click directo (sin hover)
+                      setLockedKey(it.key);
+                      setActiveKey(it.key);
+                    }}
+                    className="outline-none"
+                    aria-label={it.title.replace("\n", " ")}
+                  />
+                ))}
+              </div>
+
+              {/* Expandida en mobile */}
+              <img
+                key={`m-${active?.key || "none"}`}
+                src={active?.pieceLarge || ""}
+                alt={active?.title?.replace("\n", " ") || ""}
+                draggable="false"
+                className={[
+                  "absolute inset-0 h-full w-full object-contain origin-center",
+                  "drop-shadow-[0_40px_70px_rgba(0,0,0,0.26)]",
+                  "pointer-events-none",
+                  active ? "animate-pop" : "opacity-0 scale-[0.2] blur-[2px]",
+                  "transition-[opacity,transform,filter] duration-200 ease-out",
+                ].join(" ")}
+                style={{ visibility: active ? "visible" : "hidden" }}
+              />
+            </div>
+
+            {/* Botón volver (sin X) */}
+            {active && (
+              <button
+                type="button"
+                onClick={closeAll}
+                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white/15 px-4 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
+              >
+                Volver
+              </button>
+            )}
+          </div>
+
+          {/* Texto debajo (como tu mock mobile) */}
+          {active && (
+            <div className="mx-auto mt-6 max-w-[420px] rounded-3xl bg-white/12 p-5 text-white backdrop-blur">
+              <h4 className="whitespace-pre-line text-xl font-extrabold uppercase leading-tight">
+                {active.title}
+              </h4>
+              <p className="mt-3 text-sm leading-relaxed text-white/90">
+                {active.paragraph}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
