@@ -25,8 +25,8 @@ export function Header() {
     }
 
     return (
-        <header className="flex flex-col md:items-center  bg-black py-4 px-2">
-            <div className="w-full md:w-7xl flex md:flex-row justify-between items-center">
+        <header className="flex flex-col md:items-center  bg-black py-4 px-2 sticky">
+            <div className="w-full md:w-6xl flex md:flex-row justify-between items-center">
                 <Link to={'/'} aria-label="Ir a página de inicio">
                     {/* <img src='/img/logoSenestrariDev.webp' alt="logo de senestrari dev" loading="lazy" className="max-h-10" /> */}
                     <h1 className="text-white font-black text-2xl">LOGO</h1>

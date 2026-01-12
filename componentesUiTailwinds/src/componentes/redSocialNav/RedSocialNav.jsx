@@ -9,7 +9,6 @@ export function RedSocialNav (){
             <a href="" className='aspect-square-12 bg-blue-600 p-2 rounded-full text-white hover:scale-110 transition-transform'> <Linkedin /> </a>
             <a href="" className='aspect-square-12 bg-gray-800 p-2 rounded-full text-white hover:scale-110 transition-transform'> <Github /> </a>
             <a href="" className='aspect-square-12 bg-blue-500 p-2 rounded-full text-white hover:scale-110 transition-transform'> <Facebook /> </a>
-
         </div>
     )
 }
