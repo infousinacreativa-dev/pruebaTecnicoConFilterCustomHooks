@@ -1,7 +1,7 @@
 
 import { ProductCard } from '../../componentes/ecommerceCard/ProductCard'
 import ExperiencePillars from '../../componentes/lineTime/ExperiencePillars'
-
+import ValoresPuzzle from '../../componentes/ValoresPuzzle/ValoresPuzzle'
 
 import './Home.css'
 
@@ -20,12 +20,10 @@ const product = [
 export function Home() {
 
     return (
-        <section className='flex justify-center'>
-           
-
-            <div className="py-16">
+        <div className="py-16">
                 <ExperiencePillars />
+
+                <ValoresPuzzle />
             </div>
-        </section>
     )
 }

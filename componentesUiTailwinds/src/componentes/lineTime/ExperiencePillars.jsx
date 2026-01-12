@@ -68,7 +68,7 @@ export default function ExperiencePillars() {
       </h3>
 
       {/* ===================== DESKTOP (md+) ===================== */}
-      <div className="relative mx-auto mt-8 hidden w-full max-w-5xl md:block">
+      <div className="relative mx-auto mt-8 hidden w-full md:block">
         {/* Línea */}
         <div className={`absolute left-0 right-0 top-[37px] h-[2px] ${Purple.line}`} />
 
