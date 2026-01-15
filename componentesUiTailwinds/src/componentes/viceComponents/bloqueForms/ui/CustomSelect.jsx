@@ -20,7 +20,7 @@ export function CustomSelect({ label, options, value, onChange }) {
     <div ref={ref} className="relative w-full">
       {/* LABEL flotante */}
       {value && (
-        <span className="mb-1 block text-xs font-semibold ">
+        <span className="mb-1 block text-xs font-semibold text-[#f1f1f1]">
           {label}
         </span>
       )}
