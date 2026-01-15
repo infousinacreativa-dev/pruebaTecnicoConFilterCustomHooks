@@ -117,9 +117,9 @@ export function CtaProgramas() {
                                 />
 
 
-                                <p className="mt-1 text-lg font-semibold text-white">
-                                    Contanos: ¿cuál es hoy el principal desafío o dolor
-                                    de la comunicación de tu organización?
+                                <p className="mt-1 text-lg  text-white">
+                                    Contanos: <span className="font-semibold">¿cuál es hoy el principal desafío o dolor
+                                    de la comunicación de tu organización?</span>
                                 </p>
 
                                 <FloatingTextarea
