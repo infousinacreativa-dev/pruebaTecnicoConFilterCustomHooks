@@ -1,9 +1,11 @@
 
 import { ProductCard } from '../../componentes/ecommerceCard/ProductCard'
-import ExperiencePillars from '../../componentes/lineTime/ExperiencePillars'
-import ValoresPuzzle from '../../componentes/ValoresPuzzle/ValoresPuzzle'
+import ExperiencePillars from '../../componentes/viceComponents/lineTime/ExperiencePillars'
+import ValoresPuzzle from '../../componentes/viceComponents/ValoresPuzzle/ValoresPuzzle'
 
-import { MetodologiaProgramas } from '../../componentes/bloquePrograma/MetodologiaProgramas'
+import { MetodologiaProgramas } from '../../componentes/viceComponents/bloquePrograma/MetodologiaProgramas'
+import { CtaProgramas } from '../../componentes/viceComponents/bloqueForms/CtaProgramas'
+
 
 import './Home.css'
 
@@ -23,11 +25,12 @@ export function Home() {
 
     return (
         <div className="py-16">
-                {/* <ExperiencePillars />
+            {/* <ExperiencePillars />
                 <ValoresPuzzle /> */}
-                <MetodologiaProgramas />
+            <MetodologiaProgramas />
+            <CtaProgramas />
 
 
-            </div>
+        </div>
     )
 }
