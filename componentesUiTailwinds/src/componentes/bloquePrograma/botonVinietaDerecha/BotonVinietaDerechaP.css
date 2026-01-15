@@ -1,0 +1,75 @@
+.boton-vinieta-programas {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    margin: 0;
+    line-height: 1;
+}
+
+.boton-vinieta-programas-regular {
+    font-size: clamp(28px, 3.8vw, 33px);
+    font-weight: 400;
+    color: #111;
+    line-height: 1;
+    margin-bottom: -1.3rem;
+}
+
+/* CONTENEDOR DEL GLOBO */
+.boton-vinieta-programas-vinieta {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(28px, 3.8vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+    /* tamaño del globo */
+    padding: 0.92em 1em;
+    transform: translateY(0em);
+}
+
+/* FONDO DEL GLOBO */
+.boton-vinieta-programas-vinieta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("../../../../public/img/iconosProgramas/vinieta.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* 🔑 clave: mover el fondo para compensar la colita */
+    background-position: center 100%;
+}
+
+/* 🔑 AJUSTE VISUAL DEL TEXTO (ESTA ES LA CLAVE) */
+.boton-vinieta-programas-vinieta>span,
+.boton-vinieta-programas-vinieta {
+    transform-origin: center;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .boton-vinieta-programas {
+        gap: 6px;
+    }
+
+    .boton-vinieta-programas-vinieta {
+        padding: 1.8em 0.7em;
+
+        transform: translateY(0.1em);
+    }
+
+    .boton-vinieta-programas-vinieta::before {
+        background-position: center 62%;
+    }
+
+    .boton-vinieta-programas {
+        align-items: center;
+    }
+
+    .boton-vinieta-programas-regular {
+        margin-bottom: -2.9rem;
+    }
+}

@@ -3,6 +3,8 @@ import { ProductCard } from '../../componentes/ecommerceCard/ProductCard'
 import ExperiencePillars from '../../componentes/lineTime/ExperiencePillars'
 import ValoresPuzzle from '../../componentes/ValoresPuzzle/ValoresPuzzle'
 
+import { MetodologiaProgramas } from '../../componentes/bloquePrograma/MetodologiaProgramas'
+
 import './Home.css'
 
 
@@ -21,9 +23,11 @@ export function Home() {
 
     return (
         <div className="py-16">
-                <ExperiencePillars />
+                {/* <ExperiencePillars />
+                <ValoresPuzzle /> */}
+                <MetodologiaProgramas />
 
-                <ValoresPuzzle />
+
             </div>
     )
 }
