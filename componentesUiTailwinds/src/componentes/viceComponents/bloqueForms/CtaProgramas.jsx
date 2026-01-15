@@ -5,12 +5,14 @@ import { CustomSelect } from "./ui/CustomSelect";
 export function CtaProgramas() {
     const programas = useMemo(
         () => [
-            "Programa de interés",
-            "Programas estratégicos",
-            "Kits de impacto",
-            "Acompañamiento a largo plazo",
-            "Consultoría",
-            "Otro",
+            "Construccion de marca",
+            "Gestion estrategica de redes sociales",
+            "Marca empleadora",
+            "Diagnostico y plan de comunicacion interna",
+            "Ecoistema de canales",
+            "Programa de gestion del cambio organizacional",
+            "Procesos de Comunicación Interna",
+            "Full comunicacion integrada comunicacion 360°",
         ],
         []
     );
