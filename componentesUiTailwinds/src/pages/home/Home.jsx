@@ -7,6 +7,10 @@ import { MetodologiaProgramas } from '../../componentes/viceComponents/bloquePro
 import { CtaProgramas } from '../../componentes/viceComponents/bloqueForms/CtaProgramas'
 
 
+import { programas } from '../../componentes/viceComponents/data/programas'
+import { ProgramasCarousel } from '../../componentes/viceComponents/bloquePrograma/programas/ProgramasCarousel'
+
+
 import './Home.css'
 
 
@@ -28,7 +32,9 @@ export function Home() {
             {/* <ExperiencePillars />
                 <ValoresPuzzle /> */}
             <MetodologiaProgramas />
+            <ProgramasCarousel programas={programas} />
             <CtaProgramas />
+            
 
 
         </div>
