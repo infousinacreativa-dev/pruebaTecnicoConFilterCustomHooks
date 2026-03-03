@@ -39,7 +39,7 @@ export function CtaProgramas() {
     };
 
     return (
-        <section className="w-full">
+        <section id="formulario-programas" className="w-full">
             <div className="w-full bg-gradient-to-b from-[#8C1207] to-[#D92E1D]">
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 lg:py-20">
                     <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">

@@ -1,29 +1,39 @@
 // src/components/programas/ProgramaCard.jsx
 import { ArrowUpRight } from "lucide-react";
 
-export function ProgramaCard({ programa, onMore }) {
-  return (
-    <article className="h-full rounded-2xl bg-white p-6 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.25)] md:p-8">
-      <h4 className="text-xl font-extrabold text-neutral-900 md:text-2xl">
-        {programa.titulo}
-      </h4>
+const priceFormatter = new Intl.NumberFormat("es-AR", {
+  style: "currency",
+  currency: "ARS",
+  maximumFractionDigits: 0,
+});
 
-      {programa.subtitulo ? (
-        <p className="mt-1 font-semibold text-neutral-700">
-          {programa.subtitulo}
+export function ProgramaCard({ programa, onMore }) {
+  const shortDescriptionItems = Array.isArray(programa.descripcionCorta)
+    ? programa.descripcionCorta
+    : [programa.descripcionCorta].filter(Boolean);
+
+  return (
+    <article className="relative h-full rounded-2xl bg-white p-6 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.25)] md:p-8">
+      <div className="flex items-start justify-between gap-4">
+        <h4 className="max-w-[70%] text-xl font-extrabold text-neutral-900 md:text-2xl">
+          {programa.title}
+        </h4>
+
+        <p className="shrink-0 pt-0.5 text-right font-semibold text-neutral-700">
+          {priceFormatter.format(programa.precio ?? 0)}
         </p>
-      ) : null}
+      </div>
 
       <div className="mt-3 h-[2px] w-full bg-[#d32b22]/80" />
 
       {/* faja roja */}
       <div className="mt-3 w-full inline-block rounded-lg bg-[#d32b22] px-3 py-2 text-sm font-semibold text-white">
-        {programa.resumen}
+        {programa.objetivo}
       </div>
 
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-neutral-700">
-        {programa.bullets?.map((b, i) => (
-          <li key={i}>{b}</li>
+      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-neutral-700">
+        {shortDescriptionItems.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
 

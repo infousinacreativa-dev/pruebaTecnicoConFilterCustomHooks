@@ -2,11 +2,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 const OPTIONS = [
-  { value: "popularidad", label: "Popularidad" },
-  { value: "externa", label: "Comunicación externa" },
-  { value: "interna", label: "Comunicación interna" },
-  { value: "mayor", label: "Mayor precio" },
-  { value: "menor", label: "Menor precio" },
+  { value: "all", label: "Todos" },
+  { value: "Posicionamiento & Marca", label: "Posicionamiento & Marca" },
+  { value: "Cultura & Transformación", label: "Cultura & Transformación" },
+  { value: "Experiencia & Personas", label: "Experiencia & Personas" },
+  { value: "Impacto & Creatividad", label: "Impacto & Creatividad" },
+  { value: "Sustentabilidad", label: "Sustentabilidad" },
+  { value: "Más elegidos", label: "Más elegidos" },
+  { value: "Programas cortos", label: "Programas cortos" },
 ];
 
 export function SortDropdown({ value, onChange }) {
@@ -14,7 +17,7 @@ export function SortDropdown({ value, onChange }) {
   const ref = useRef(null);
 
   const currentLabel = useMemo(() => {
-    return OPTIONS.find((o) => o.value === value)?.label ?? "Popularidad";
+    return OPTIONS.find((o) => o.value === value)?.label ?? "Todos";
   }, [value]);
 
   useEffect(() => {
@@ -31,14 +34,13 @@ export function SortDropdown({ value, onChange }) {
     };
   }, []);
 
-  const select = (val) => {
-    onChange(val);
+  const select = (nextValue) => {
+    onChange(nextValue);
     setOpen(false);
   };
 
   return (
     <div ref={ref} className="relative inline-block z-50 min-w-[220px]">
-      {/* HEADER */}
       <button
         type="button"
         onClick={() => setOpen((s) => !s)}
@@ -62,7 +64,6 @@ export function SortDropdown({ value, onChange }) {
         />
       </button>
 
-      {/* PANEL: SIEMPRE MONTADO -> anima abrir/cerrar */}
       <div
         className={[
           "absolute left-0 right-0 top-full z-50 origin-top",
